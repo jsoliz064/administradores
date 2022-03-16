@@ -50,7 +50,7 @@
                                 Docente</th>
                             <th scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
-                                Inscritos</th>
+                                Grupo</th>
                             <th width="20%" scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Acciones</th>
@@ -78,7 +78,6 @@
                                         <div class="my-4 px-8">{{ $grupo->materia->docente }}</div>
                                     @else
                                         <div class="my-4 px-8">Vacío</div>
-
                                     @endif
                                 </td>
                                 <td class="px-8 py-6 text-md text-gray-500 font-bold" style="white-space: nowrap">
@@ -107,7 +106,7 @@
                                     @endcan
                                     <div class=" my-3 whitespace-nowrap flex">
                                         @if ($grupo->grupo)
-                                            <a href="{{$grupo->grupo}}"
+                                            <a href="{{ $grupo->grupo }}"
                                                 class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
                                                 <i class="fa fa-whatsapp" aria-hidden="true"></i>
                                             </a>
@@ -139,9 +138,7 @@
                             {{ $materiasa->links() }}
                         </div>
                     </x-table>
-
                 @endif
-
             @else
                 <div class="px-6 py-4">
                     No hay materias con ese nombre
@@ -305,7 +302,6 @@
 
 
     @push('js')
-
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -339,7 +335,6 @@
                 });
             });
         </script>
-
     @endpush
 
 
