@@ -1018,5 +1018,106 @@ class Grupos extends Seeder
             'materia_id' => 50,
             'docente' => 'CALDERON FLORES MODESTO FRANKL'
         ]);
+
+        /* AUDITORIA INFORMATICA */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 51,
+            'docente' => 'VARGAS PENA LEONARDO'
+        ]);
+
+
+        /* SISTEMAS DE COMUNICACION II */
+        Grupo::create([
+            'grupo' => 'E',
+            'materia_id' => 52,
+            'docente' => 'SELAYA GARVIZU IVAN VLADISHLAV'
+        ]);
+
+        /* TALLER DE ANALISIS Y DISENO DE REDE  */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 53,
+            'docente' => 'GONZALES SANDOVAL JORGE ANTONI'
+        ]);
+
+
+        /* lEGISLAC.EN REDES Y COMUNICACIONES   */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 54,
+            'docente' => 'LAMAS RODRIGUEZ MARCOS RODRIGO'
+        ]);
+
+        /*  SISTEMAS EXPERTOS   */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 55,
+            'docente' => 'BARROSO VIRUEZ GINO'
+        ]);
+
+        /* TALLER DE GRADO I */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 56,
+            'docente' => 'MARTINEZ CANEDO ROLANDO ANTONI'
+        ]);
+        Grupo::create([
+            'grupo' => 'SC',
+            'materia_id' => 56,
+            'docente' => 'ALANOCA GUTIERREZ JAVIER'
+        ]);
+        Grupo::create([
+            'grupo' => 'SS',
+            'materia_id' => 56,
+            'docente' => 'ALANOCA GUTIERREZ JAVIER'
+        ]);
+
+        /* INGENIERIA DE SOFTWARE II */
+        Grupo::create([
+            'grupo' => 'SB',
+            'materia_id' => 57,
+            'docente' => 'MARTINEZ CANEDO ROLANDO ANTONI'
+        ]);
+
+        /* TECNOLOGIA WEB */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 58,
+            'docente' => 'BALCAZAR VEIZAGA EVANS'
+        ]);
+        Grupo::create([
+            'grupo' => 'SC',
+            'materia_id' => 58,
+            'docente' => 'BALCAZAR VEIZAGA EVANS'
+        ]);
+
+        /* ARQUITECTURA DEL SOFTWARE */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 59,
+            'docente' => 'VEIZAGA GONZALES JOSUE OBED'
+        ]);
+
+        /* GESTION Y ADMINISTRACION DE REDES */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 60,
+            'docente' => 'VARGAS PENA LEONARDO'
+        ]);
+
+        /*  REDES INALAMBRIC.Y COMUNIC.MOVILES */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 61,
+            'docente' => 'VARGAS PENA LEONARDO'
+        ]);
+
+        /* SEGURIDAD EN REDES Y TRANSMIS.DE DA */
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 62,
+            'docente' => 'BALCAZAR VEIZAGA EVANS'
+        ]);
     }
 }
