@@ -3,13 +3,13 @@
 @section('title', 'Materias-Grupos')
 
 @section('content')
-    @livewire('grupos')
+    @livewire('grupos')    
 @stop
-
 
 @section('css')
 
 @stop
 
 @section('js')
+
 @stop

@@ -44,13 +44,10 @@
                             </th>
                             <th scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
-                                Materia</th>
+                                Sigla</th>
                             <th scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
-                                Docente</th>
-                            <th scope="col"
-                                class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
-                                Inscritos</th>
+                                Nombre</th>
                             <th width="20%" scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Acciones</th>
@@ -69,34 +66,16 @@
                                     <div class="text-md font-bold text-gray-900">
                                         {{ $materia->sigla }}
                                     </div>
-                                    <div class="text-md text-gray-500">
+                                </td>
+                                <td class="px-8 py-4">
+                                    <div class="text-md font-bold text-gray-900">
                                         {{ $materia->nombre }}
                                     </div>
                                 </td>
-                                <td>
-                                    @if ($materia->docente != null)
-                                        <div class="my-4 px-8">{{ $materia->docente }}</div>
-                                    @else
-                                        <div class="my-4 px-8">Vacío</div>
-                                    @endif
-                                </td>
-                                <td class="px-8 py-6 text-md text-gray-500 font-bold" style="white-space: nowrap">
-                                    @if ($materia->inscritos == null)
-                                        <span class="px-2 my-4 rounded-full inline-flex text-white bg-gray-500">
-                                            Sin inscritos
-                                        </span>
-                                    @else
-                                        {{ $materia->inscritos }}
-                                    @endif
-                                </td>
+                                
                                 <td class=" inline-flex justify-center px-6 py-4 whitespace-nowrap flex">
                                     @can('admin')
-                                        <div class="my-3 whitespace-nowrap flex">
-                                            <a class="ml-2 font-bold text-white rounded cursor-pointer bg-indigo-600 hover:bg-indigo-500 py-2 px-4"
-                                                href="{{ route('materia.estudiantes.show', $materia->id) }}">
-                                                <i class="fas fa-users"></i>
-                                            </a>
-                                        </div>
+                                        
                                         <div class="my-3 whitespace-nowrap flex">
                                             <a wire:click="edit({{ $materia->id }})"
                                                 class="ml-2 font-bold text-white rounded cursor-pointer bg-gray-600 hover:bg-gray-700 py-2 px-4">
@@ -104,19 +83,7 @@
                                             </a>
                                         </div>
                                     @endcan
-                                    <div class=" my-3 whitespace-nowrap flex">
-                                        @if ($materia->grupo)
-                                            <a href="{{ $materia->grupo }}"
-                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
-                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                                            </a>
-                                        @else
-                                            <a wire:click="$emit('alert2','¡No hay grupo!')"
-                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
-                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                                            </a>
-                                        @endif
-                                    </div>
+                                   
                                     @can('admin')
                                         <div class=" my-3 whitespace-nowrap flex">
                                             <a wire:click.prevent="eliminar({{ $materia->id }})"
@@ -165,10 +132,7 @@
                 <x-jet-input type="text" class="w-full" wire:model="nombre" />
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Nombre del Docente:" />
-                <x-jet-input type="text" class="w-full" wire:model="docente" />
-            </div>
+            
 
             <div class="mb-4">
                 <x-jet-label value="Carrera:" />
@@ -204,10 +168,7 @@
                 </div>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Grupo de WhatsApp:" />
-                <x-jet-input type="text" class="w-full" wire:model="grupo" placeholder='enlace del grupo' />
-            </div>
+            
 
         </x-slot>
 
@@ -239,10 +200,7 @@
                 <x-jet-input type="text" class="w-full" wire:model="nombre" />
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Nombre del Docente:" />
-                <x-jet-input type="text" class="w-full" wire:model="docente" />
-            </div>
+          
 
             <div class="mb-4">
                 <x-jet-label value="Carrera:" />
@@ -278,10 +236,7 @@
                 </div>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Grupo de WhatsApp:" />
-                <x-jet-input type="text" class="w-full" wire:model="grupo" placeholder='enlace del grupo' />
-            </div>
+            
 
         </x-slot>
 

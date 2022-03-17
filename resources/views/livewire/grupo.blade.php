@@ -34,7 +34,7 @@
             </div>
 
 
-            @if (count($materiasa))
+            @if (count($grupos))
                 <table class=" table table-striped min-w-full divide-y divide-gray-200 text-md shadow-lg mt-4 border-5">
                     <thead class="rounded-3xl px-8 text-white" style="background-color: #D15238">
                         <tr>
@@ -42,7 +42,8 @@
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Id
                             </th>
-                            <th scope="col"
+                            
+                            <th width="20%" scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Materia</th>
                             <th scope="col"
@@ -51,9 +52,17 @@
                             <th scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Grupo</th>
-                            <th width="20%" scope="col"
+                            <th scope="col"
+                                class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
+                                Admin 1</th>
+                            <th scope="col"
+                                class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
+                                Admin 2</th>
+                            @can('admin')
+                            <th width="15%" scope="col"
                                 class="cursor-pointer px-8 py-2 text-left text-sm font-bold uppercase tracking-wider">
                                 Acciones</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -67,46 +76,29 @@
                                 </td>
                                 <td class="px-8 py-4">
                                     <div class="text-md font-bold text-gray-900">
-                                        {{ $grupo->materia->sigla }}
+                                        {{ $grupo->sigla }}
                                     </div>
                                     <div class="text-md text-gray-500">
-                                        {{ $grupo->materia->nombre }}
+                                        {{ $grupo->nombre }}
                                     </div>
                                 </td>
                                 <td>
-                                    @if ($grupo->materia->docente != null)
-                                        <div class="my-4 px-8">{{ $grupo->materia->docente }}</div>
+                                    @if ($grupo->docente != null)
+                                        <div class="my-4 px-8">{{ $grupo->docente }}</div>
                                     @else
                                         <div class="my-4 px-8">Vacío</div>
                                     @endif
                                 </td>
                                 <td class="px-8 py-6 text-md text-gray-500 font-bold" style="white-space: nowrap">
-                                    @if ($grupo->materia->id == null)
-                                        <span class="px-2 my-4 rounded-full inline-flex text-white bg-gray-500">
-                                            Sin inscritos
-                                        </span>
-                                    @else
+                                    <div class="text-md font-bold text-gray-900">
                                         {{ $grupo->grupo }}
-                                    @endif
+                                    </div>
                                 </td>
-                                <td class=" inline-flex justify-center px-6 py-4 whitespace-nowrap flex">
-                                    @can('admin')
-                                        <div class="my-3 whitespace-nowrap flex">
-                                            <a class="ml-2 font-bold text-white rounded cursor-pointer bg-indigo-600 hover:bg-indigo-500 py-2 px-4"
-                                                href="{{ route('materia.estudiantes.show', $materia->id) }}">
-                                                <i class="fas fa-users"></i>
-                                            </a>
-                                        </div>
-                                        <div class="my-3 whitespace-nowrap flex">
-                                            <a wire:click="edit({{ $grupo->id }})"
-                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-gray-600 hover:bg-gray-700 py-2 px-4">
-                                                <i class=" fas fa-edit"></i>
-                                            </a>
-                                        </div>
-                                    @endcan
+
+                                <td class="px-8 py-6 text-md text-gray-500 font-bold">
                                     <div class=" my-3 whitespace-nowrap flex">
-                                        @if ($grupo->grupo)
-                                            <a href="{{ $grupo->grupo }}"
+                                        @if ($grupo->admin1!=null)
+                                            <a href="https://wa.me/591{{ $grupo->admin1 }}?text=Hola,%20¿me%20puedes%20agregar%20al%20grupo%20de%20{{ $grupo->sigla }}%20{{ $grupo->nombre }}%20-%20{{ $grupo->grupo }}?"
                                                 class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
                                                 <i class="fa fa-whatsapp" aria-hidden="true"></i>
                                             </a>
@@ -117,7 +109,35 @@
                                             </a>
                                         @endif
                                     </div>
-                                    @can('admin')
+                                </td>
+
+                                <td class="px-8 py-6 text-md text-gray-500 font-bold">
+                                    <div class=" my-3 whitespace-nowrap flex">
+                                        @if ($grupo->admin1!=null)
+                                            <a href="https://wa.me/591{{ $grupo->admin1 }}?text=Hola,%20¿me%20puedes%20agregar%20al%20grupo%20de%20{{ $grupo->sigla }}%20{{ $grupo->nombre }}%20-%20{{ $grupo->grupo }}?"
+                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
+                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                            </a>
+                                        @else
+                                            <a wire:click="$emit('alert2','¡No hay grupo!')"
+                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
+                                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </td>
+
+                                @can('admin')
+
+                                    <td class=" inline-flex justify-center px-6 py-4 whitespace-nowrap flex">
+                                        
+                                        <div class="my-3 whitespace-nowrap flex">
+                                            <a wire:click="edit({{ $grupo->id }})"
+                                                class="ml-2 font-bold text-white rounded cursor-pointer bg-gray-600 hover:bg-gray-700 py-2 px-4">
+                                                <i class=" fas fa-edit"></i>
+                                            </a>
+                                        </div>
+
                                         <div class=" my-3 whitespace-nowrap flex">
                                             <a wire:click.prevent="eliminar({{ $grupo->id }})"
                                                 class="ml-2 font-bold text-white rounded cursor-pointer bg-red-600 hover:bg-red-500 py-2 px-4"
@@ -125,17 +145,17 @@
                                                 <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             </a>
                                         </div>
-                                    @endcan
+                                    </td>
+                                @endcan
 
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                @if ($materiasa->hasPages())
+                @if ($grupos->hasPages())
                     <x-table>
                         <div class="px-6 py-3">
-                            {{ $materiasa->links() }}
+                            {{ $grupos->links() }}
                         </div>
                     </x-table>
                 @endif
@@ -151,62 +171,38 @@
     <x-jet-dialog-modal wire:model="open">
 
         <x-slot name="title">
-            Crear materia:
+            Crear grupo:
         </x-slot>
 
         <x-slot name="content">
-            <div class="mb-4">
-                <x-jet-label value="Sigla de la Materia:" />
-                <x-jet-input wire:model='sigla' type="text" class=" w-full" />
+            <div>
+                <x-jet-label value="Materia:" />
+                <select class="appearance-none" wire:model="materia_id" name="materia_id">
+                    <option>Seleccione una Materia</option>
+                    @foreach ($materias as $materia)
+                        <option value="{{ $materia->id }}">{{$materia->nombre}}</option>
+                    @endforeach
+                  </select>
             </div>
 
             <div class="mb-4">
-                <x-jet-label value="Nombre de la Materia:" />
-                <x-jet-input type="text" class="w-full" wire:model="nombre" />
+                <x-jet-label value="Nombre del grupo:" />
+                <x-jet-input wire:model='grupo' type="text" class="w-full" />
             </div>
 
             <div class="mb-4">
-                <x-jet-label value="Nombre del Docente:" />
+                <x-jet-label value="Administrador 1:" />
+                <x-jet-input type="text" class="w-full" wire:model="admin1" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Administrador 2:" />
+                <x-jet-input type="text" class="w-full" wire:model="admin2" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Docente:" />
                 <x-jet-input type="text" class="w-full" wire:model="docente" />
-            </div>
-
-            <div class="mb-4">
-                <x-jet-label value="Carrera:" />
-                <div class="flex justify-center">
-                    <div>
-                        <div class="form-check">
-                            <input wire:model="c1" name="carrera1"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera1->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera1->nombre }}
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input wire:model="c2" name="carrera2"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera2->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera2->nombre }}
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input wire:model="c3" name="carrera3"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera3->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera3->nombre }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-4">
-                <x-jet-label value="Grupo de WhatsApp:" />
-                <x-jet-input type="text" class="w-full" wire:model="grupo" placeholder='enlace del grupo' />
             </div>
 
         </x-slot>
@@ -225,62 +221,38 @@
     <x-jet-dialog-modal wire:model="open2">
 
         <x-slot name="title">
-            Crear materia:
+            Editar Grupo:
         </x-slot>
 
         <x-slot name="content">
             <div class="mb-4">
-                <x-jet-label value="Sigla de la Materia:" />
-                <x-jet-input wire:model='sigla' type="text" class=" w-full" />
+                <x-jet-label value="Nombre del grupo:" />
+                <x-jet-input wire:model='grupo' type="text" class="w-full" />
             </div>
 
             <div class="mb-4">
-                <x-jet-label value="Nombre de la Materia:" />
-                <x-jet-input type="text" class="w-full" wire:model="nombre" />
+                <x-jet-label value="Administrador 1:" />
+                <x-jet-input type="text" class="w-full" wire:model="admin1" />
             </div>
 
             <div class="mb-4">
-                <x-jet-label value="Nombre del Docente:" />
+                <x-jet-label value="Administrador 2:" />
+                <x-jet-input type="text" class="w-full" wire:model="admin2" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Docente:" />
                 <x-jet-input type="text" class="w-full" wire:model="docente" />
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Carrera:" />
-                <div class="flex justify-center">
-                    <div>
-                        <div class="form-check">
-                            <input wire:model="c1" name="carrera1"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera1->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera1->nombre }}
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input wire:model="c2" name="carrera2"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera2->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera2->nombre }}
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input wire:model="c3" name="carrera3"
-                                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                type="checkbox" value="{{ $carrera3->id }}" id="flexCheckDefault">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
-                                {{ $carrera3->nombre }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-4">
-                <x-jet-label value="Grupo de WhatsApp:" />
-                <x-jet-input type="text" class="w-full" wire:model="grupo" placeholder='enlace del grupo' />
+            <div>
+                <x-jet-label value="Materia:" />
+                <select class="appearance-none" wire:model="materia_id" name="materia_id">
+                    <option>{{$this->materia_nombre}}</option>
+                    @foreach ($materias as $materia)
+                        <option value="{{ $materia->id }}">{{$materia->nombre}}</option>
+                    @endforeach
+                  </select>
             </div>
 
         </x-slot>

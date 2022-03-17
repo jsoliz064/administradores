@@ -17,46 +17,58 @@ class Grupos extends Seeder
         Grupo::create([
             'grupo' => 'Z1',
             'materia_id' => 3,
+            'docente' =>'ORTIZ ARTEAGA VICTOR HUGO'
         ]);
         Grupo::create([
             'grupo' => 'Z2',
             'materia_id' => 3,
+            'docente' =>'ROMAN ROCA RUFINO WILBERTO'
         ]);
         Grupo::create([
             'grupo' => 'Z3',
             'materia_id' => 3,
+            'docente' =>'CHAU WONG JORGE'
         ]);
         Grupo::create([
             'grupo' => 'Z4',
             'materia_id' => 3,
+            'docente' =>'CALDERON FLORES MODESTO FRANKL'
         ]);
         Grupo::create([
             'grupo' => 'Z5',
             'materia_id' => 3,
-        ]);
-        Grupo::create([
-            'grupo' => 'SN',
-            'materia_id' => 3,
-        ]);
-        Grupo::create([
-            'grupo' => 'SP',
-            'materia_id' => 3,
-        ]);
-        Grupo::create([
-            'grupo' => 'SI',
-            'materia_id' => 3,
-        ]);
-        Grupo::create([
-            'grupo' => 'SK',
-            'materia_id' => 3,
-        ]);
-        Grupo::create([
-            'grupo' => 'SG',
-            'materia_id' => 3,
+            'docente' =>'LAZO ARTEAGA CARLOS ROBERTO'
         ]);
         Grupo::create([
             'grupo' => 'SM',
             'materia_id' => 3,
+            'docente' =>'ROSALES FUENTES JORGE MARCELO'
+
+        ]);
+        Grupo::create([
+            'grupo' => 'SP',
+            'materia_id' => 3,
+            'docente' =>'CANO CESPEDES JORGE'
+        ]);
+        Grupo::create([
+            'grupo' => 'SI',
+            'materia_id' => 3,
+            'docente' =>'CAYOJA LUCANA VICTOR MILTON'
+        ]);
+        Grupo::create([
+            'grupo' => 'SK',
+            'materia_id' => 3,
+            'docente' =>'CAYOJA LUCANA VICTOR MILTON'
+        ]);
+        Grupo::create([
+            'grupo' => 'SG',
+            'materia_id' => 3,
+            'docente' =>'SANCHEZ HERVAS JOSE GABRIEL '
+        ]);
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 3,
+            'docente' =>'CALDERON FLORES MODESTO FRANKL'
         ]);
 
         /* INTRODUCCION A LA INFORMATICA */
@@ -969,7 +981,7 @@ class Grupos extends Seeder
 
         /* SISTEMAS DE COMUNICACION I */
         Grupo::create([
-            'grupo' => 'E',
+            'grupo' => 'SA',
             'materia_id' => 45,
             'docente' => ' SEVERICHE TOLEDO SAUL'
         ]);
@@ -986,6 +998,11 @@ class Grupos extends Seeder
             'grupo' => 'SA',
             'materia_id' => 47,
             'docente' => 'GUTIERREZ BRUNO KATIME ESTHER'
+        ]);
+        Grupo::create([
+            'grupo' => 'SB',
+            'materia_id' => 47,
+            'docente' => 'PEREZ FERREIRA UBALDO'
         ]);
 
         /*   INGENIERIA DE SOFTWARE I */
@@ -1029,7 +1046,7 @@ class Grupos extends Seeder
 
         /* SISTEMAS DE COMUNICACION II */
         Grupo::create([
-            'grupo' => 'E',
+            'grupo' => 'SA',
             'materia_id' => 52,
             'docente' => 'SELAYA GARVIZU IVAN VLADISHLAV'
         ]);
@@ -1051,9 +1068,17 @@ class Grupos extends Seeder
 
         /*  SISTEMAS EXPERTOS   */
         Grupo::create([
-            'grupo' => 'SA',
+            'grupo' => 'SB',
             'materia_id' => 55,
             'docente' => 'BARROSO VIRUEZ GINO'
+        ]);
+
+        /* TALLER DE ANALISIS Y DISEÑO DE DATOS */
+
+        Grupo::create([
+            'grupo' => 'SA',
+            'materia_id' => 53,
+            'docente' => 'GONZALES SANDOVAL JORGE ANTONI'
         ]);
 
         /* TALLER DE GRADO I */

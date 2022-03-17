@@ -141,6 +141,11 @@ class MateriaSeed extends Seeder
         ])->carreras()->attach([1]);
 
         Materia::create([
+            'sigla'=> 'RDS310',
+            'nombre'=> 'ELECTRONICA APLICADA A REDES',
+        ])->carreras()->attach([3]);
+
+        Materia::create([
             'sigla'=> 'INF310',
             'nombre'=> 'Estructura de Datos II',
         ])->carreras()->attach([1,2]);
@@ -249,6 +254,11 @@ class MateriaSeed extends Seeder
             'sigla'=> 'ECO449',
             'nombre'=> 'Preparación y Evaluación de Proyectos',
         ])->carreras()->attach([1,2,3]);
+
+        Materia::create([
+            'sigla'=> 'ELC208',
+            'nombre'=> 'REDES ADHOC',
+        ])->carreras()->attach([3]);
 
         Materia::create([
             'sigla'=> 'INF422',
@@ -444,6 +454,13 @@ class MateriaSeed extends Seeder
             'sigla'=> 'ELC108',
             'nombre'=> 'Control y Automatización',
         ])->carreras()->attach([2]);
+
+        Materia::create([
+            'sigla'=> 'ELT354',
+            'nombre'=> 'SEÑALES Y SISTEMAS',
+        ])->carreras()->attach([3]);
+
+        
 
     }
 }

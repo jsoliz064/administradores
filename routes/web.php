@@ -18,13 +18,17 @@ use App\Http\Controllers\MateriaController;
 */
 
 Route::get('/', function () {
-    return view('grupo.index');
+    return view('grupos.index');
 })->name('inicio');
+
+Route::get('maestro-oferta', function () {
+    return view('grupos.index');
+})->name('maestro.index');
 
 Auth::routes();
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('inicio');
+    return view('grupos.index');
 })->name('dashboard');
 
 Route::get('salir', function () {
@@ -35,6 +39,7 @@ Route::get('salir', function () {
 Route::get('materias', function () {
     return view('materia.index');
 })->name('materias.index');
+
 
 Route::get('materias-estudiantes/{materia_id}', [MateriaController::class, 'show2'])->name('materia.estudiantes.show');
 Route::get('estudiantes', [EstudianteController::class, 'index2'])->name('estudiantes.index');

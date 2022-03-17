@@ -5,24 +5,20 @@ namespace App\Http\Livewire;
 use App\Models\Grupo;
 use App\Models\Materia;
 use App\Models\Carrera;
-use App\Models\CarreraMateria;
 use Livewire\WithPagination;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\DB;
 
 class Grupos extends Component
 {
     use WithPagination;
 
-    public $admin1,$admin2,$grupo;
+    public $docente,$admin1,$admin2,$grupo,$grupo_id,$materia_nombre,$materia_id;
 
-
-    public $materia_id, $sigla, $nombre, $docente;
     public $search = "";
-    public $cant = 5;
+    public $cant=5;
     public $open = false;
     public $open2 = false;
-    public $carrera1, $carrera2, $carrera3, $c1, $c2, $c3, $cr1, $cr2, $cr3;
 
     protected $listeners = ['render', 'search' => '$refresh'];
 
@@ -33,79 +29,57 @@ class Grupos extends Component
 
     public function limpiarCampos()
     {
-        $this->sigla = "";
-        $this->nombre = "";
-        $this->semestre = "";
         $this->docente = "";
-        $this->c1 = "";
-        $this->c2 = "";
-        $this->c3 = "";
         $this->materia_id = "";
-
+        $this->grupo_id="";
         $this->admin1="";
         $this->admin2="";
         $this->grupo="";
 
     }
-    public function eliminar($materia_id)
+    public function eliminar($grupo_id)
     {
-        Materia::find($materia_id)->delete();
+        Grupo::find($grupo_id)->delete();
     }
 
     public function render()
     {
-        $materiasa = Materia::where('nombre', 'like', '%' . $this->search . '%')
-            ->orWhere('sigla', 'like', '%' . $this->search . '%')
-            ->simplePaginate($this->cant);
-        
-        $grupos=Grupo::all();
+        /* $grupos = Grupo::where('grupo', 'like', '%' . $this->search . '%')
+            ->orWhere('admin1', 'like', '%' . $this->search . '%')
+            ->simplePaginate($this->cant); */
+        $grupos = DB::table('grupos')
+                    ->join('materias', 'materias.id', '=', 'grupos.materia_id')
+                    ->select('grupos.id','materias.nombre','materias.sigla','grupos.grupo','grupos.admin1','grupos.admin2','grupos.docente','grupos.materia_id')
+                    ->where('nombre', 'like', '%' . $this->search . '%')
+                    ->orWhere('sigla', 'like', '%' . $this->search . '%')
+                    ->simplePaginate($this->cant);
+        $materias=Materia::all();
 
-        $this->carrera1 = Carrera::find(1);
-        $this->carrera2 = Carrera::find(2);
-        $this->carrera3 = Carrera::find(3);
-
-        return view('livewire.grupo', compact('grupos','materiasa'));
+        return view('livewire.grupo', compact('grupos','materias'));
     }
     public function guardar()
     {
-        $materia = Materia::create([
-            'sigla' => $this->sigla,
-            'nombre' => $this->nombre,
-            'docente' => $this->docente,
-            'inscritos' => 0,
+        $grupo=Grupo::create([
             'grupo' => $this->grupo,
+            'admin1' => $this->admin1,
+            'admin2' => $this->admin2,
+            'docente' => $this->docente,
+            'materia_id' => $this->materia_id,
         ]);
 
-        if ($this->c1 != null)
-            $array[] = $this->c1;
-        if ($this->c2 != null)
-            $array[] = $this->c2;
-        if ($this->c3 != null)
-            $array[] = $this->c3;
-        $materia->carreras()->attach($array);
         $this->limpiarCampos();
     }
     public function edit($id)
     {
         $this->open2 = true;
-        $this->materia_id = $id;
-        $materia = Materia::find($id);
-        $this->sigla = $materia->sigla;
-        $this->nombre = $materia->nombre;
-        $this->docente = $materia->docente;
-        $this->grupo = $materia->grupo;
-        $carreras = $materia->carreras;
-        foreach ($carreras as $carrera) {
-            if ($carrera->id == 1)
-                $this->c1 = 1;
-            if ($carrera->id == 2)
-                $this->c2 = 2;
-            if ($carrera->id == 3)
-                $this->c3 = 3;
-        }
-        $this->cr1 = $this->c1;
-        $this->cr2 = $this->c2;
-        $this->cr3 = $this->c3;
+        $this->grupo_id = $id;
+        $grupo = Grupo::find($id);
+        $this->materia_nombre=$grupo->materia->nombre;
+        $this->materia_id=$grupo->materia->id;
+        $this->grupo = $grupo->grupo;
+        $this->admin1 = $grupo->admin1;
+        $this->admin2 = $grupo->admin2;
+        $this->docente = $grupo->docente;
     }
     public function cancelar()
     {
@@ -116,29 +90,15 @@ class Grupos extends Component
 
     public function update()
     {
-        $materia = Materia::find($this->materia_id);
-        $materia->update([
-            'sigla' => $this->sigla,
-            'nombre' => $this->nombre,
-            'docente' => $this->docente,
+        $grupo = Grupo::find($this->grupo_id);
+        $grupo->update([
             'grupo' => $this->grupo,
+            'admin1' => $this->admin1,
+            'admin2' => $this->admin2,
+            'docente' => $this->docente,
+            'materia_id' => $this->materia_id,
         ]);
-        if ($this->cr1 != $this->c1 || $this->cr2 != $this->c2 || $this->cr3 != $this->c3) {
-            $carreramaterias = CarreraMateria::where('materia_id', $materia->id)->get();
-            foreach ($carreramaterias as $carreramateria) {
-                $carreramateria->delete();
-            }
-            if ($this->c1 != null) {
-                $array[] = $this->c1;
-            }
-            if ($this->c2 != null) {
-                $array[] = $this->c2;
-            }
-            if ($this->c3 != null) {
-                $array[] = $this->c3;
-            }
-            $materia->carreras()->attach($array);
-        }
+
         $this->limpiarCampos();
         $this->open2 = false;
     }

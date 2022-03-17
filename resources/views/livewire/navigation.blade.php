@@ -12,20 +12,16 @@
                         <a @if (Request::url() != route('inicio')) href="{{ route('inicio') }}" class="text-menu-selected text-inline" @else disabled=true class="text-inline text-selected" @endif>
                             <i class="fas fa-home"></i>Inicio</a>
                     </li>
+                    @can('admin')
                     <li @if (Request::url() == route('materias.index'))  class="menu-selected" @endif>
                         <a @if (Request::url() != route('materias.index'))  href="{{ route('materias.index') }}" class="text-menu-selected text-inline" @else disabled=true class="text-inline text-selected" @endif>
                             <i class="fas fa-book"></i>Ver Materias</a>
                     </li>
+                    @endcan
                     <li @if (Request::url() == route('contact-us'))  class="menu-selected" @endif>
                         <a @if (Request::url() != route('contact-us'))  href="{{ route('contact-us') }}" class="text-menu-selected text-inline" @else disabled=true class="text-inline text-selected" @endif>
                             <i class="fas fa-address-book"></i>Contáctanos</a>
                     </li>
-                    @can('admin')
-                        <li @if (Request::url() == route('estudiantes.index'))  class="menu-selected" @endif>
-                            <a @if (Request::url() != route('estudiantes.index'))  href="{{ route('estudiantes.index') }}" class="text-menu-selected text-inline" @else disabled=true class="text-inline" @endif>
-                                <i class="fas fa-book"></i>Ver Estudiantes</a>
-                        @endcan
-
                         @can('admin')
                         <li @if (Request::url() == route('admin.users.index'))  class="menu-selected" @endif>
                             <a @if (Request::url() != route('admin.users.index'))  href="{{ route('admin.users.index') }}" class="text-menu-selected text-inline" @else disabled=true class="text-inline" @endif>

@@ -57,9 +57,6 @@ class ShowMateria extends Component
         $materia = Materia::create([
             'sigla' => $this->sigla,
             'nombre' => $this->nombre,
-            'docente' => $this->docente,
-            'inscritos' => 0,
-            'grupo' => $this->grupo,
         ]);
 
         if ($this->c1 != null)
@@ -78,8 +75,6 @@ class ShowMateria extends Component
         $materia = Materia::find($id);
         $this->sigla = $materia->sigla;
         $this->nombre = $materia->nombre;
-        $this->docente = $materia->docente;
-        $this->grupo = $materia->grupo;
         $carreras = $materia->carreras;
         foreach ($carreras as $carrera) {
             if ($carrera->id == 1)
@@ -106,8 +101,6 @@ class ShowMateria extends Component
         $materia->update([
             'sigla' => $this->sigla,
             'nombre' => $this->nombre,
-            'docente' => $this->docente,
-            'grupo' => $this->grupo,
         ]);
         if ($this->cr1 != $this->c1 || $this->cr2 != $this->c2 || $this->cr3 != $this->c3) {
             $carreramaterias = CarreraMateria::where('materia_id', $materia->id)->get();
