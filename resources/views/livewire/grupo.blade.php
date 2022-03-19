@@ -113,8 +113,8 @@
 
                                 <td class="px-8 py-6 text-md text-gray-500 font-bold">
                                     <div class=" my-3 whitespace-nowrap flex">
-                                        @if ($grupo->admin1!=null)
-                                            <a href="https://wa.me/591{{ $grupo->admin1 }}?text=Hola,%20¿me%20puedes%20agregar%20al%20grupo%20de%20{{ $grupo->sigla }}%20{{ $grupo->nombre }}%20-%20{{ $grupo->grupo }}?"
+                                        @if ($grupo->admin2!=null)
+                                            <a href="https://wa.me/591{{ $grupo->admin2 }}?text=Hola,%20¿me%20puedes%20agregar%20al%20grupo%20de%20{{ $grupo->sigla }}%20{{ $grupo->nombre }}%20-%20{{ $grupo->grupo }}?"
                                                 class="ml-2 font-bold text-white rounded cursor-pointer bg-green-500 hover:bg-green-600 py-2 px-4">
                                                 <i class="fa fa-whatsapp" aria-hidden="true"></i>
                                             </a>
