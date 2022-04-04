@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => "https://supportficct.ga/administradores/public",
+    'asset_url' => "",
 
     /*
     |--------------------------------------------------------------------------
